@@ -1,0 +1,38 @@
+
+.inputContainer {
+    display: flex;
+    align-items: center; 
+}
+
+img {
+    max-width: 40px;
+    max-height: 40px;
+    background-color: transparent;
+}
+
+#contenant{
+    display: flex;
+    align-items: center; /* PAS NECESSAIRE (centre verticalement) */
+    justify-content: center;
+
+}
+
+#contenu{
+    display: inline-block;
+    /*border: 2px solid black; */
+    padding : 20px;
+    border-radius: 15px;
+    width: 60%;
+    background-color: rgb(243, 240, 240);;
+}
+
+a:visited{
+    color : black;
+}
+
+#visu{
+    border-radius: 15px;
+}
+
+
+

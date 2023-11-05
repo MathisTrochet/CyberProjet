@@ -12,6 +12,8 @@ echo $_SESSION['ppAdress']
     <link rel="stylesheet" type = "text/css" href="../Style/commentaire.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <script src="../Js/fonctionDeBase.js"></script>
+    <script src="../Js/phpCall.js"></script>
+
 </head>
 <body>
     <header>

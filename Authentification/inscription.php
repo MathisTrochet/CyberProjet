@@ -14,8 +14,14 @@ session_start();
 </head>
 <body>
     <header>
-    <h1>MYPENTESTERLAB</h1>
-        <input class = "pittBottom" type="button" value="Deconnexion" name="deco" onclick="indexDeconnexion()">
+        <h1>MYPENTESTERLAB</h1>
+        <div class='home'>                                                                                  <!-- HEADER > HOME -->
+            <a class = "pitthomme" href="/CyberProjet/index.php">
+                <img id= "imgProfil" src="/CyberProjet/Image/house.png"> 
+                <?php echo "<span style='color : grey;'>" . "Home" . "</span>"; ?>          
+            </a>
+                
+        </div>
     </header>
 
     <main>

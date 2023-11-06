@@ -6,6 +6,21 @@ function deconnexion() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // La session a été détruite côté serveur, vous pouvez maintenant effectuer des actions côté client, comme rediriger l'utilisateur vers la page de connexion.
+            window.location.href = 'http://127.0.0.1/CyberProjet/Authentification/connexionSEC.php';
+        }
+    };
+
+    xhr.send();
+}
+
+function trait() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'http://127.0.0.1/CyberProjet/php/traitement.php', true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // La session a été détruite côté serveur, vous pouvez maintenant effectuer des actions côté client, comme rediriger l'utilisateur vers la page de connexion.
             window.location.href = 'http://127.0.0.1/CyberProjet/index.php';
         }
     };

@@ -1,6 +1,9 @@
 <?php
 session_start();
-echo $_SESSION['ppAdress']
+
+
+//page private (on doit être connecté pour acceder a la page), donc :
+include('../php/privatePage.php');
 ?>
 
 <!DOCTYPE html>
@@ -18,20 +21,21 @@ echo $_SESSION['ppAdress']
 <body>
     <header>
         <h1>PAGE DISCUSSION</h1>
-        <a class = "pitt" href="../Authentification/userProfile.php">
-                <img id= "imgProfil"src="<?php echo $_SESSION['ppAdress'] ?>">
+        <div class='profile'>
+            <a class = "pitt" href="/CyberProjet/userProfile.php">                                      <!-- HEADER > PROFILE  -->
+                
+                <img id= "imgProfil" src="<?php if (isset($_SESSION['ppAdress'])) echo $_SESSION['ppAdress']; else echo "/CyberProjet/Image/profil.png"; ?>">
             <?php 
-                    if (isset($_SESSION['username'])) {$username = $_SESSION['username']; echo "<span style='color : grey;'>" . $username . "</span>"; }
-                    else {header('Location:/Authentification/connexionSEC.php');exit;}
+                    echo "<span style='color : grey;'>" . $username . "</span>"; 
             ?>
             </a>
             
         </div>
 
-        <div class='home'>
-            <a class = "pitthomme" href="../index.php">
-                <img id= "imgProfil" src="../Image/house.png"> 
-                <?php echo "<span style='color : grey;'>" . "Home" . "</span>"; ?>
+        <div class='home'>                                                                                  <!-- HEADER > HOME -->
+            <a class = "pitthomme" href="/CyberProjet/index.php">
+                <img id= "imgProfil" src="/CyberProjet/Image/house.png"> 
+                <?php echo "<span style='color : grey;'>" . "Home" . "</span>"; ?>          
             </a>
             
         </div>
@@ -74,12 +78,6 @@ if (!isset($_SESSION["id_comment"])){
 $idComment = $_SESSION["id_comment"] ;
 $type = gettype($idComment);
 
-// on verifie qu'on est bien Connecté ET on recup >username<
-if (isset($_SESSION["username"])){
-    $username = ($_SESSION["username"]);
-    //echo 'salut je suis ' . $username;
-    }
-else header("location:../Authentification/connexionSEC.php"); // si non connecté ca degage
 
 //DATE
 $currentDate = date("Y-m-d H:i:s"); // "d" pour le jour, "F" pour le mois, "Y" pour l'année

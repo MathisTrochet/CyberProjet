@@ -29,9 +29,13 @@ function visibilityOn(){
 
 
 
-function yo(){
-alert(5);
+function truee(){
+alert("truee");
 }
+
+function falsee(){
+    alert("falsee");
+    }
 
 window.addEventListener("scroll", function() {
     // Récupérez la position de défilement actuelle.

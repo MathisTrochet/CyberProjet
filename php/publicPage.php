@@ -1,5 +1,14 @@
 <?php 
-session_start();
+
+
+if (isset($_SESSION['username'])){ //recupere le blaze du type
+    $username = $_SESSION['username']; 
+}
+else $username = "visitor";
+
+
+/*
+
 if (isset($_SESSION['username'])) $_SESSION['ppAdress'] = "../FichierClient/" . $username;
 
 if (!isset($_SESSION['ppAdress'])){
@@ -15,6 +24,6 @@ if (!isset($_SESSION['ppAdress'])){
     } 
 }
 
-
+*/
 ?>
 

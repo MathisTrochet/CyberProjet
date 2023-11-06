@@ -7,6 +7,9 @@
 
 
 session_start();
+
+include('php/privatePage.php');
+
 $serveur = "127.0.0.1";
 $utilisateur = "root";
 $motDePasse = "";
@@ -14,11 +17,6 @@ $baseDeDonnees = "informationutilisateurs";
 
 
 $connexion = new PDO ('mysql:host=' . $serveur . ';dbname=' . $baseDeDonnees,  $utilisateur, $motDePasse);
-
-if (isset($_SESSION['username'])){
-    $username = $_SESSION['username'];
-}
-else {header('Location:Authentification/connexionSEC.php');exit;}
 
 ?>
 
@@ -35,22 +33,22 @@ else {header('Location:Authentification/connexionSEC.php');exit;}
 </head>
 <body>
     <header>
-    <div class='profile'>                                           <!-- HEADER > PROFILE  -->
-        <h1>MYPROFILE</h1>
-            <a class = "pitt" href="userProfile.php">
-                <img id= "imgProfil"src="<?php if (isset($_SESSION['ppAdress'])) echo $_SESSION['ppAdress']; else echo "Image/profil.png"; ?>">
+    <h1>PAGE DISCUSSION</h1>
+        <div class='profile'>
+            <a class = "pitt" href="userProfile.php">                                      <!-- HEADER > PROFILE  -->
+                
+                <img id= "imgProfil" src="<?php if (isset($_SESSION['ppAdress'])) echo $_SESSION['ppAdress']; else echo "/CyberProjet/Image/profil.png"; ?>">
             <?php 
-                    if (isset($_SESSION['username'])) {echo "<span style='color : grey;'>" . $username . "</span>"; }
+                    echo "<span style='color : grey;'>" . $username . "</span>"; 
             ?>
             </a>
             
         </div>
 
-        <div class='home'>                                                          <!-- HEADER > HOME -->
-            <a class = "pitthomme" href="index.php">
+        <div class='home'>                                                                                  <!-- HEADER > HOME -->
             <a class = "pitthomme" href="index.php">
                 <img id= "imgProfil" src="Image/house.png"> 
-                <?php echo "<span style='color : grey;'>" . "Home" . "</span>"; ?>
+                <?php echo "<span style='color : grey;'>" . "Home" . "</span>"; ?>          
             </a>
             
         </div>
@@ -215,7 +213,7 @@ else {header('Location:Authentification/connexionSEC.php');exit;}
     <br><br><br><br><br><br><br>
     </main>
     <footer>
-        <a href="../Commentaire/commentaire.php">
+        <a href="/CyberProjet/Commentaire/commentaire.php">
             <p>Cliquez ici pour ajouter un commentaire à ce site</p>
         </a>
     </footer>

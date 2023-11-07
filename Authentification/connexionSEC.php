@@ -49,15 +49,13 @@ session_start();
             <br>
             
             <div class="inputContainer">
-                <label>Votre identifiant </label>
-                <input type = "text" name = "identifiant">
+                <input type = "text" name = "identifiant" placeholder="Identifiant">
             </div>
             <br>
             <div class="inputContainer">
-                <label>Votre Mot de passe </label>
-                <input id = "mdp" type = "password" name = "motdepasse">
+                <input id = "mdp" type = "password" name = "motdepasse" placeholder="Mot de passe">
                 <a href="javascript:void(0);" onmousedown="Show();" onmouseup="Hide();">
-                    <img id = "monImage" src="../Image/iconeMdp.png" alt="iconemdp">
+                    <img id = "monImage" src="/CyberProjet/Image/iconeMdp.png" alt="iconemdp">
                 </a>
             </div>
 

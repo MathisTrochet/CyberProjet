@@ -18,6 +18,22 @@ $baseDeDonnees = "informationutilisateurs";
 
 $connexion = new PDO ('mysql:host=' . $serveur . ';dbname=' . $baseDeDonnees,  $utilisateur, $motDePasse);
 
+if (!isset($_SESSION['ppAdress'])){
+
+    $requete = $connexion->prepare("SELECT * FROM infousers WHERE identifiant = :identifiant");
+    $requete->bindParam(':identifiant', $username);
+    $requete->execute();
+    $row = $requete->fetch(PDO::FETCH_ASSOC);
+    if ($requete){
+        if ($requete->rowCount() > 0){
+            if ($row['imageData']){
+                $_SESSION["ppAdress"] = '/CyberProjet/FichierClient/' . $row['imageData'];
+            }
+            
+        }
+    } 
+}  
+
 ?>
 
 <!DOCTYPE html>
@@ -127,6 +143,11 @@ $connexion = new PDO ('mysql:host=' . $serveur . ';dbname=' . $baseDeDonnees,  $
         
 
         <?php
+
+        //creer une var de session temp qui stock le chemin de l'ancien chemin de pp
+        //si on decide d'annuler les modification, ppadress reprendre 
+        //le probleme : entre le moment ou on valide le fichier choisi et où on 
+        //confirme les modif, on a aucun moyen de continuer a afficher l'ancienne photo 
 
         if (isset($_POST['Enregistrer'])){
             if (isset($_FILES['fichier']) && $_FILES["fichier"]["error"] == UPLOAD_ERR_OK){

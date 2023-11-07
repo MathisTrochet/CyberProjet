@@ -44,29 +44,24 @@
             <br>
              
             <div class="inputContainer">
-                <label>Votre Nom </label>
-                <input type = "text" name = "lastName">
+                <input type = "text" name = "lastName" placeholder="Nom">
             </div>
             <br>
             <div class="inputContainer">
-                <label>Votre Prenom </label>
-                <input type = "text" name = "firstName">
+                <input type = "text" name = "firstName" placeholder="Prenom">
             </div>
             <br>
             <div class="inputContainer">
-                <label>Votre Age </label>
-                <input type = "text" name = "age">
+                <input type = "text" name = "age" placeholder="Age">
             </div>
             <br> 
             
             <div class="inputContainer">
-                <label>Votre identifiant </label>
-                <input type = "text" name = "identifiant">
+                <input type = "text" name = "identifiant" placeholder="Identifiant">
             </div>
             <br>
             <div class="inputContainer">
-                <label>Votre Mot de passe </label>
-                <input id = "mdp" type = "password" name = "motdepasse">
+                <input id = "mdp" type = "password" name = "motdepasse" placeholder="Mot de passe">
                 <a href="javascript:void(0);" onmousedown="Show();" onmouseup="Hide();">
                     <img id = "monImage" src="../Image/iconeMdp.png" alt="iconemdp">
                 </a>
@@ -129,7 +124,7 @@ $baseDeDonnees = "informationutilisateurs";
                 echo 'Nom d\'utilisateur déjà pris';
             }
             else {
-                $requete2 = $connexion->prepare("INSERT INTO infousers (Nom, Prenom, Age, Identifiant, MotdePasse) VALUES (:Nom, :Prenom , :Age, :Identifiant, :MotDePasse)"); 
+                $requete2 = $connexion->prepare("INSERT INTO infousers (Nom, Prenom, Age, Identifiant, MotdePasse, imageData) VALUES (:Nom, :Prenom , :Age, :Identifiant, :MotDePasse, NULL)"); 
                 $requete2->bindParam(':Nom', $Nom);
                 $requete2->bindParam(':Prenom', $Prenom);
                 $requete2->bindParam(':Age', $Age);
@@ -146,16 +141,7 @@ $baseDeDonnees = "informationutilisateurs";
                 }
             }
         }
-        else echo 'erreur requete ID';
-        
-        
-
-        
-        
-        //else echo "Erreur SQL : " . $connexion->errorInfo()[2];
-
-            
-        //executer la requete    
+        else echo 'erreur requete ID';  
     }
 // Fermer la connexion à la base de données
 $connexion = null;

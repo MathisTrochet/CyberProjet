@@ -36,6 +36,14 @@ input[type="button"]:hover {
     color :rgb(207, 236, 207)
 }
 
+input[type="text"], input[type="password"] {
+    padding : 5px;
+    border : 1px ;
+    border-radius: 10px;
+    background-color: rgb(252, 252, 252) ;
+    
+}
+
 
 form{
     border : 2px;

@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+include('php/publicPage.php');
+
 $serveur = "127.0.0.1";
 $utilisateur = "root";
 $motDePasse = "";
@@ -8,7 +11,7 @@ $baseDeDonnees = "informationutilisateurs";
 
 $connexion = new PDO ('mysql:host=' . $serveur . ';dbname=' . $baseDeDonnees,  $utilisateur, $motDePasse);
 
-include('php/publicPage.php');
+
 
 if (!isset($_SESSION['ppAdress'])){
 

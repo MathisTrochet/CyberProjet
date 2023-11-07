@@ -27,7 +27,7 @@ if (!isset($_SESSION['ppAdress'])){
     if ($requete){
         if ($requete->rowCount() > 0){
             if ($row['imageData']){
-                $_SESSION["ppAdress"] = '/CyberProjet/FichierClient/' . $row['imageData'];
+                $_SESSION["ppAdress"] = 'FichierClient/' . $row['imageData'];
             }
             
         }
@@ -53,7 +53,7 @@ if (!isset($_SESSION['ppAdress'])){
         <div class='profile'>
             <a class = "pitt" href="userProfile.php">                                      <!-- HEADER > PROFILE  -->
                 
-                <img id= "imgProfil" src="<?php if (isset($_SESSION['ppAdress'])) echo $_SESSION['ppAdress']; else echo "/CyberProjet/Image/profil.png"; ?>">
+                <img id= "imgProfil" src="<?php if (isset($_SESSION['ppAdress'])) echo "/CyberProjet/" . $_SESSION['ppAdress']; else echo "/CyberProjet/Image/profil.png"; ?>">
             <?php 
                     echo "<span style='color : grey;'>" . $username . "</span>"; 
             ?>
@@ -149,6 +149,8 @@ if (!isset($_SESSION['ppAdress'])){
         //le probleme : entre le moment ou on valide le fichier choisi et où on 
         //confirme les modif, on a aucun moyen de continuer a afficher l'ancienne photo 
 
+
+
         if (isset($_POST['Enregistrer'])){
             if (isset($_FILES['fichier']) && $_FILES["fichier"]["error"] == UPLOAD_ERR_OK){
                 $photo = $_FILES["fichier"]["name"];
@@ -156,18 +158,15 @@ if (!isset($_SESSION['ppAdress'])){
                 $emplTemp = $_FILES["fichier"]["tmp_name"];
                 $infosFichier = pathinfo($photo);
                 $extension = $infosFichier['extension'];
-                $destination = "FichierClient/" . $username . "." . $extension;
-                $_SESSION["photo"] = $username . "." . $extension;
-
+                $timeStamp = date('YmdHis');
+                $destination = "FichierClient/" . $username . $timeStamp . "." . $extension;
                 $_SESSION["temp"] = $destination;
 
-                if (file_exists($destination)){
-                    if (unlink($destination)) {
-                        echo 'Le fichier a été supprimé avec succès.';
-                    } else {
-                        echo 'Erreur : Impossible de supprimer le fichier.';
+                /* $_SESSION["temp"] = $destination;
+
+                
                 }
-                }
+                */
 
                 if (move_uploaded_file($emplTemp, $destination)) {
                     // Le fichier a été téléchargé avec succès
@@ -187,21 +186,19 @@ if (!isset($_SESSION['ppAdress'])){
         <br>
 
         <form action="" method="POST">
-        <input type="submit" name="confirm" value="Confirmer">
+        <input type="submit" name="confirm" value="Confirmer les modification">
+        <input type="submit" name="cancel" value="Annuler les modifications">
         </form>
 
 
         <?php
         if (isset($_POST['confirm']) && isset($_SESSION["temp"])){
             echo 'confirm activated';
-        $_SESSION["ppAdress"] = $_SESSION["temp"];
+        
 
-        if (isset($_SESSION['photo'])){
-            echo $_SESSION['photo'];
-        }
         try{
             $requete = $connexion->prepare("UPDATE infousers SET imageData = :imageData WHERE identifiant = :username");
-            $requete->bindParam(":imageData", $_SESSION["photo"]);
+            $requete->bindParam(":imageData", $_SESSION["temp"]);
             $requete->bindParam(":username", $_SESSION["username"]);
     
             $requete->execute();
@@ -217,11 +214,28 @@ if (!isset($_SESSION['ppAdress'])){
         else {
             echo "Erreur SQL : " . $connexion->errorInfo()[2];
         }
+        echo $_SESSION["ppAdress"];
+        if (file_exists($_SESSION["ppAdress"])){ // supprimer l'ancienne image
+            
+            if (unlink($_SESSION["ppAdress"])) {
+                echo 'Le fichier a été supprimé avec succès.';
+            } else {
+                echo 'Erreur : Impossible de supprimer le fichier.';
+            }
+        }
 
-        unset($_SESSION["photo"]);
+        $_SESSION["ppAdress"] = $_SESSION["temp"];
         unset($_SESSION["temp"]);
-        //header('location:userProfile.php');
-        }            
+        header('location:userProfile.php'); 
+        }  
+        
+        if (isset($_POST['cancel']) && isset($_SESSION["temp"])){
+            unset($_SESSION["temp"]);
+            header('location:userProfile.php'); 
+            
+        }
+
+                 
                                                                                                 
         ?>
         </div>

@@ -1,7 +1,6 @@
 body{
 
     margin: 0 auto;
-    margin-top: -22px;
 }
 
 h1{
@@ -15,6 +14,9 @@ h1{
     font-family: "Montserrat";
 }
 
+a:visited{
+    color : black;
+}
 
 
 .pitt{

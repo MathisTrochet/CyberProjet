@@ -37,20 +37,9 @@ function falsee(){
     alert("falsee");
     }
 
-window.addEventListener("scroll", function() {
-    // Récupérez la position de défilement actuelle.
-    const scrollPosition = window.scrollY;
+function animationPP(){
+    const imageContainer = document.querySelector('.imageContainer');
     
-    // Enregistrez la position de défilement dans le stockage local.
-    localStorage.setItem("scrollPosition", scrollPosition);
-});
-
-window.addEventListener("load", function() {
-    // Vérifiez s'il y a une position enregistrée dans le stockage local.
-    const scrollPosition = localStorage.getItem("scrollPosition");
-    
-    // Si une position est enregistrée, réglez la position de défilement sur cette valeur.
-    if (scrollPosition !== null) {
-        window.scrollTo(0, scrollPosition);
-    }
-});
+    // Ajoutez la classe pour déclencher l'animation
+    imageContainer.classList.add('transi');
+}

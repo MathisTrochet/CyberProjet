@@ -64,7 +64,6 @@ session_start();
             </div>
             <br>
             <div class="inputContainer">
-                <label>Votre Mot de passe </label>
                 <input id = "mdp" type = "password" name = "motdepasse" placeholder="Mot de passe">
                 <a href="javascript:void(0);" onmousedown="Show();" onmouseup="Hide();">
                     <img id = "monImage" src="../Image/iconeMdp.png" alt="iconemdp">

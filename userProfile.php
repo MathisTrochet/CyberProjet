@@ -49,7 +49,7 @@ if (!isset($_SESSION['ppAdress'])){
 </head>
 <body>
     <header>
-    <h1>PAGE DISCUSSION</h1>
+    <h1>PAGE PROFIL</h1>
         <div class='profile'>
             <a class = "pitt" href="userProfile.php">                                      <!-- HEADER > PROFILE  -->
                 
@@ -134,9 +134,14 @@ if (!isset($_SESSION['ppAdress'])){
                 <div>
                     
                     <form action="" method="POST" enctype="multipart/form-data">
-                    <label>Ajouter une image de profile : </label>
-                    <input id = "fichier" type = "file" name = "fichier">
-                    <input type="submit" value="Enregistrer" name="Enregistrer">
+                        <div class="imageContainer">
+                            <img id="visu" src="<?php if (isset($_SESSION["temp"])){echo $_SESSION["temp"];}else{echo "Image/profil.png";} ?>" alt="image" >
+                        </div>
+                        <br><br>
+                        <label for="fichier">Selectionner une image</label>
+                        <input id = "fichier" type = "file" name = "fichier"/>
+                        <br><br>
+                        <input type="submit" value="Enregistrer" name="Enregistrer"/>
                     </form>
                     
                 </div>
@@ -149,7 +154,9 @@ if (!isset($_SESSION['ppAdress'])){
         //le probleme : entre le moment ou on valide le fichier choisi et où on 
         //confirme les modif, on a aucun moyen de continuer a afficher l'ancienne photo 
 
-
+        if (isset($_FILES['fichier'])){
+            echo 'Enregistrez votre photo pour visualiser';
+        }
 
         if (isset($_POST['Enregistrer'])){
             if (isset($_FILES['fichier']) && $_FILES["fichier"]["error"] == UPLOAD_ERR_OK){
@@ -170,25 +177,29 @@ if (!isset($_SESSION['ppAdress'])){
 
                 if (move_uploaded_file($emplTemp, $destination)) {
                     // Le fichier a été téléchargé avec succès
-                    echo "Le fichier a été téléchargé avec succès : " . $destination;
+                    //echo "Le fichier a été téléchargé avec succès : " . $destination;
                     
                 } else {
                     // Une erreur s'est produite lors du téléchargement du fichier
-                    echo "Une erreur s'est produite lors du téléchargement du fichier.";
+                    //echo "Une erreur s'est produite lors du téléchargement du fichier.";
                 }
+                header('location:userProfile.php');
             }
         }
-        else //echo "Aucun fichier n'a été téléchargé ou une erreur s'est produite.";
 
         ?>
         
-        <img id="visu" src="<?php if (isset($_SESSION["temp"])){echo $_SESSION["temp"];}else{echo "Image/profil.png";} ?>" alt="image">
-        <br>
+            
+            <br>
 
-        <form action="" method="POST">
-        <input type="submit" name="confirm" value="Confirmer les modification">
-        <input type="submit" name="cancel" value="Annuler les modifications">
-        </form>
+            <form action="" method="POST">
+                
+                    <input type="submit" name="confirm" value="Confirmer les modification" onclick="animationPP()">
+                    <br><br>
+                    <input type="submit" name="cancel" value="Annuler les modifications">
+                    <br>
+                    
+            </form>
 
 
         <?php
@@ -224,6 +235,7 @@ if (!isset($_SESSION['ppAdress'])){
             }
         }
 
+        sleep(1);
         $_SESSION["ppAdress"] = $_SESSION["temp"];
         unset($_SESSION["temp"]);
         header('location:userProfile.php'); 

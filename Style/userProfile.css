@@ -4,12 +4,6 @@
     align-items: center; 
 }
 
-img {
-    max-width: 40px;
-    max-height: 40px;
-    background-color: transparent;
-}
-
 #contenant{
     display: flex;
     align-items: center; /* PAS NECESSAIRE (centre verticalement) */
@@ -24,15 +18,79 @@ img {
     border-radius: 15px;
     width: 60%;
     background-color: rgb(243, 240, 240);;
+    
 }
+
 
 a:visited{
     color : black;
 }
 
-#visu{
-    border-radius: 15px;
+
+.imageContainer img{
+    border-radius: 15px;    
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    
 }
+
+@keyframes arrive-animation {
+    0% {
+        transform: scale(1);
+        border: 2px solid transparent;
+        border-radius: 15px;
+        opacity: 1;
+    }
+    95%{
+        opacity: 1;
+        border-radius: 27px;
+    }
+    100% {
+        transform: translate(1476%, -615%) scale(0.26);
+        opacity : 0;
+    }
+}
+
+.imageContainer.transi img{
+    animation : arrive-animation 0.9s ease-in-out forwards;
+}
+
+input[name="fichier"]{
+    /*color: rgb(243, 240, 240); /* le rendre invisible de façon barbare */
+}
+
+
+input[name="confirm"]{
+    position: absolute;
+    right: 0;
+    margin-right: 300px;
+    
+    padding : 3px;
+    background-color: white;
+    border: 1px;
+    border-radius : 4px;
+    
+}
+
+input[name="confirm"]:hover , input[name="cancel"]:hover{
+    background-color: rgb(243, 240, 240);
+}
+
+input[name="cancel"]{
+    position: absolute;
+    right: 0;
+    margin-right: 300px;
+    
+    padding : 3px;
+    background-color: white;
+    border: 1px;
+    border-radius : 4px;
+    
+}
+
+
+
 
 
 

@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
         <h1>MYPRODUCT</h1>
         
         <div class='profile'>
-            <a class = "pitt" href="/CyberProjet/userProfile.php">                                      <!-- HEADER > PROFILE  -->
+            <a class = "pitt" href=<?php if ($username === 'admin'){echo '/CyberProjet/admin.php';} else{echo '/CyberProjet/userProfile.php';}?>>                                      <!-- HEADER > PROFILE  -->
                 
                 <img id= "imgProfil" src="<?php if (isset($_SESSION['ppAdress'])) echo "/CyberProjet/" . $_SESSION['ppAdress']; else echo "/CyberProjet/Image/profil.png"; ?>">
             <?php 
@@ -93,6 +93,10 @@ if (isset($_GET['id'])) {
                 if ($requete->rowCount() > 0){
                         if ($row['nom'] && $row['prix'] && $row['vendeur'] && $row['description']){
                             
+                            if (isset($row['imageData'])) $dataImage= readfile("../FichierClient/products-imageData.bin");
+                            //echo $dataImage;
+
+
                             echo $row["nom"] . ", " . $row["prix"] . "€";
                             echo "<br>" . "vendu par : " . $row["vendeur"] . "<br>" . $row["description"] . "<br>";
                             echo "quantité restante : " . $row["nbStock"] . "<br>" ;

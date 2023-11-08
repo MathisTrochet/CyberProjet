@@ -110,8 +110,10 @@ $baseDeDonnees = "informationutilisateurs";
                 if (password_verify($MotDePasse, $DataMDP)) {
                     echo "Connexion réussie";
                     $_SESSION['username'] = $Identifiant;   // <-
-                    //$_SESSION["temp"] = "../Image/profil.png";
-                    header("Location:../index.php");
+                    if ($Identifiant === "admin"){
+                        header("Location:../admin.php");
+                    }
+                    else header("Location:../index.php");
                     exit();
 
                 }

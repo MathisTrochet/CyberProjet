@@ -1,0 +1,30 @@
+
+h2 {
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size : 27px;
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center; /* Centre verticalement le contenu */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    background-color: #38444d;
+    display: flex;
+    justify-content:space-around;
+}
+
+li {
+    margin: 7px 0; 
+    font-size: 17px; 
+    color: white; 
+    text-decoration : none;
+}
+
+li:hover {
+    color : #909497;
+}

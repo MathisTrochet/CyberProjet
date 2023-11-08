@@ -51,7 +51,7 @@ if (!isset($_SESSION['ppAdress'])){
         <h1>MYSHOP</h1>
         
         <div class='profile'>
-            <a class = "pitt" href="/CyberProjet/userProfile.php">                                      <!-- HEADER > PROFILE  -->
+            <a class = "pitt" href=<?php if ($username === 'admin'){echo '/CyberProjet/admin.php';} else{echo '/CyberProjet/userProfile.php';}?>>                                      <!-- HEADER > PROFILE  -->
                 
                 <img id= "imgProfil" src="<?php if (isset($_SESSION['ppAdress'])) echo "/CyberProjet/" . $_SESSION['ppAdress']; else echo "/CyberProjet/Image/profil.png"; ?>">
             <?php 
@@ -76,7 +76,7 @@ if (!isset($_SESSION['ppAdress'])){
 
     <main>
         <h2>SHOP<h2>
-    <a href="" onclick=""></a>
+    
 
         <?php
             //if (!isset($_SESSION['idProduct']))

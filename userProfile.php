@@ -10,6 +10,7 @@ session_start();
 
 include('php/privatePage.php');
 
+
 $serveur = "127.0.0.1";
 $utilisateur = "root";
 $motDePasse = "";
@@ -51,7 +52,8 @@ if (!isset($_SESSION['ppAdress'])){
     <header>
     <h1>PAGE PROFIL</h1>
         <div class='profile'>
-            <a class = "pitt" href="userProfile.php">                                      <!-- HEADER > PROFILE  -->
+
+            <a class = "pitt" href=<?php if ($username === 'admin'){echo '/CyberProjet/admin.php';} else{echo '/CyberProjet/userProfile.php';}?>>                                      <!-- HEADER > PROFILE  -->
                 
                 <img id= "imgProfil" src="<?php if (isset($_SESSION['ppAdress'])) echo "/CyberProjet/" . $_SESSION['ppAdress']; else echo "/CyberProjet/Image/profil.png"; ?>">
             <?php 
@@ -248,7 +250,7 @@ if (!isset($_SESSION['ppAdress'])){
         }
 
                  
-                                                                                                
+             $connexion = null;                                                                                   
         ?>
         </div>
     </div> 

@@ -8,6 +8,7 @@ h2 {
 .inputContainer {
     display: flex;
     align-items: center; /* Centre verticalement le contenu */
+    position : fixed;
 }
 
 ul {
@@ -16,6 +17,7 @@ ul {
     background-color: #38444d;
     display: flex;
     justify-content:space-around;
+    
 }
 
 li {

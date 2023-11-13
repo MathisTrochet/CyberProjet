@@ -94,10 +94,71 @@ if (!isset($_SESSION['ppAdress'])){
         <h2 id="gestion-boutique">Gestion de la boutique</h2>
         <p>Ajouter un produit</p> 
         <br>
+
+        <form action="" method="POST">
+            <label for="nomProduit">Inserer Nom</label>
+            <input type="text" name="nomProduit">
+            <br><br>
+
+            <label for="nomProduit">Inserer Prix</label>
+            <input type="text" name="prixProduit">
+            <br><br>
+
+            <label for="nomProduit">Inserer Vendeur</label>
+            <input type="text" name="vendeurProduit" value="Mathis' Industries">
+            <br><br>
+
+            <label for="nomProduit">Inserer Description</label>
+            <input type="text" name="descriptionProduit">
+            <br><br>
+
+            <label for="nomProduit">Inserer nbStock</label>
+            <input type="text" name="nbStockProduit">
+            <br><br>
+
+            <input type="submit" name="envoyer">
+
+        </form>
+
+        <?php 
+
+        $requete = $connexion->prepare("SELECT MAX(id) AS max_id FROM products");
+        $requete->execute();
+        if ($row = $requete->fetch(PDO::FETCH_ASSOC)){
+            $idMax = $row['max_id'];
+        }
+
+        if (isset($_POST['envoyer']) ){
+
+            $connexion = new PDO ('mysql:host=' . $serveur . ';dbname=' . $baseDeDonnees,  $utilisateur, $motDePasse);
+
+            $nouvelId = $idMax + 1;
+
+
+            $requete = $connexion->prepare("INSERT INTO products (id, nom, prix, vendeur, descriptionTxt, nbStock) VALUES (:id, :nom, :prix , :vendeur, :descriptionTxt, :nbStock)");
+            $requete->bindParam(':id', $nouvelId);
+            $requete->bindParam(':nom', $_POST['nomProduit']);
+            $requete->bindParam(':prix', $_POST['prixProduit']);
+            $requete->bindParam(':vendeur', $_POST['vendeurProduit']);
+            $requete->bindParam(':descriptionTxt', $_POST['descriptionProduit']);
+            $requete->bindParam(':nbStock', $_POST['nbStockProduit']);
+            if ($requete->execute()){
+                echo("s'est bien passé");
+            }
+            else echo ("pas bien passé");
+
+
+        }
+        else echo ("pas de submit");
+
+        ?>
+
         <form action="" method="POST" enctype="multipart/form-data">
-            <label for="send">Importer l'image </label>
+            <br>
+            <label for="send">Importer une image pour le dernier article ajouté</label>
             <input type="file" name= "fichier" value="Parcourir">
             <input type="submit" name= "enregistrer" value="enregistrer">
+            <br>
         </form>
         <?php 
 
@@ -113,10 +174,11 @@ if (!isset($_SESSION['ppAdress'])){
                     // Connexion à la base de données (à adapter en fonction de votre configuration)
 
                     // Préparez la requête d'insertion
-                    $requete = $connexion->prepare("UPDATE products SET imageNom = :imageNom, imageData = :imageData WHERE id = 2");
+                    $requete = $connexion->prepare("UPDATE products SET imageNom = :imageNom, imageData = :imageData WHERE id = :idMax");
 
                     // Liez les données
                     $requete->bindParam(':imageData', $imageData, PDO::PARAM_LOB);
+                    $requete->bindParam(':idMax', $idMax, PDO::PARAM_LOB);
                     $requete->bindParam(':imageNom', $imageName);
                     
 

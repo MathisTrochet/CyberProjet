@@ -80,21 +80,22 @@ if (!isset($_SESSION['ppAdress'])){
 
         <?php
             //if (!isset($_SESSION['idProduct']))
-             $_SESSION['idProduct'] = 1; 
-            $idProduct = $_SESSION['idProduct'];
+            // $_SESSION['idProduct'] = 1; 
+            //$idProduct = $_SESSION['idProduct'];
+            $idProduct = 1;
             $requete = $connexion->prepare("SELECT * FROM products");
             $requete->bindParam(':id', $idProduct);
             $requete->execute();
             if ($requete){
                 if ($requete->rowCount() > 0){
                     while ($row = $requete->fetch(PDO::FETCH_ASSOC)){
-                        if ($row['nom'] && $row['prix'] && $row['vendeur'] && $row['description']){
+                        if ($row['nom'] && $row['prix'] && $row['vendeur'] && $row['descriptionTxt']){
                             
                             echo '<a href="produit.php?id=';
                             echo $idProduct . '">';
                             echo $row["nom"] . ", " . $row["prix"] . "€";
                             echo '</a>';
-                            echo "<br>" . "vendu par : " . $row["vendeur"] . "<br>" . $row["description"] . "<br><br>";
+                            echo "<br>" . "vendu par : " . $row["vendeur"] . "<br>" . $row["descriptionTxt"] . "<br><br>";
                        }
                        $idProduct++;
                     }
@@ -102,7 +103,7 @@ if (!isset($_SESSION['ppAdress'])){
                     
                 }
             } 
-            $_SESSION['idProduct'] = $idProduct;
+            //$_SESSION['idProduct'] = $idProduct;
             
         ?>
     

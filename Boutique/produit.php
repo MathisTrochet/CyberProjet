@@ -92,7 +92,7 @@ if (isset($_GET['id'])) {
             $row = $requete->fetch(PDO::FETCH_ASSOC);
             if ($requete->execute()){
                 if ($requete->rowCount() > 0){
-                        if ($row['nom'] && $row['prix'] && $row['vendeur'] && $row['description']){
+                        if ($row['nom'] && $row['prix'] && $row['vendeur'] && $row['descriptionTxt']){
                             
                             if (!empty($row['imageData'])){
 
@@ -112,7 +112,7 @@ if (isset($_GET['id'])) {
                             echo "<div id='description'>";
                             echo "<br><br>";
                             echo "<span id='nom'>" . $row["nom"] . "</span>" .  "<span id='prix'>" . $row["prix"] . "€ </span>";
-                            echo "<br><br>" . "Vendu par : " . "<span id='vendeur'>" .$row["vendeur"] . " </span> <br>" . $row["description"] . "<br> ";
+                            echo "<br><br>" . "Vendu par : " . "<span id='vendeur'>" .$row["vendeur"] . " </span> <br>" . $row["descriptionTxt"] . "<br> ";
                             echo "quantité restante : " . "<span id='nbStock'>" . $row["nbStock"] . "</span> <br>" ;
                             echo "</div>";
                             echo "</div>";
@@ -129,7 +129,9 @@ if (isset($_GET['id'])) {
 
     <br><br>
     <label for="ajoutPanier">Ajouter au panier</label>
-    <input type="button" name= "ajoutPanier" value="Ajouter">
+    <a href="" onclick="">
+        <img src="/CyberProjet/Image/panier.png" alt="panier">
+    </a>
     <p>On est pas bien là?</p>
     <br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br>

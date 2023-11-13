@@ -1,9 +1,12 @@
 #structProduit{
     display: flex;
+    justify-content: center;
+
 }
 
 #description{
     font-size: 18px;
+
 }
 
 #nom{
@@ -23,4 +26,14 @@
     font-weight: bold;
     font-style: italic;
 
+}
+
+img[alt="panier"]{
+    width: 15px;
+    height: 15px;
+}
+
+img[alt="Image encodée en base64"]{
+    max-width: 300px;
+    max-height: 300px;
 }

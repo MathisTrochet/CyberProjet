@@ -113,7 +113,7 @@ if (!isset($_SESSION['ppAdress'])){
                     // Connexion à la base de données (à adapter en fonction de votre configuration)
 
                     // Préparez la requête d'insertion
-                    $requete = $connexion->prepare("UPDATE products SET imageNom = :imageNom, imageData = :imageData WHERE id = 1");
+                    $requete = $connexion->prepare("UPDATE products SET imageNom = :imageNom, imageData = :imageData WHERE id = 2");
 
                     // Liez les données
                     $requete->bindParam(':imageData', $imageData, PDO::PARAM_LOB);

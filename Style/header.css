@@ -50,12 +50,13 @@ a:visited{
     width: 21px;
     height: 21px;
     border-radius: 15px;
-    margin-right: 10px;
-    vertical-align:-10%;
+    left: 88%;
+    bottom: 88%;
+    
     display: inline-block;
 }
 
-input[type="button"]{
+header input[type="button"]{
     position: absolute;
     margin-top: -21px;
     right: 0;

@@ -1,0 +1,26 @@
+#structProduit{
+    display: flex;
+}
+
+#description{
+    font-size: 18px;
+}
+
+#nom{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#prix{
+    margin-left: 20px;
+}
+
+#vendeur{
+    font-style: italic;
+}
+
+#nbStock{
+    font-weight: bold;
+    font-style: italic;
+
+}

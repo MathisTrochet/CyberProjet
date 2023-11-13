@@ -44,8 +44,8 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <title>La securité  avant tout</title>
-    <link rel="stylesheet" type = "text/css" href="../Style/boutique.css"> 
     <link rel="stylesheet" type = "text/css" href="../Style/header.css">
+    <link rel="stylesheet" type = "text/css" href="../Style/boutique.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <script src="../Js/fonctionDeBase.js"></script>
     <script src="../Js/phpCall.js"></script>
@@ -84,22 +84,38 @@ if (isset($_GET['id'])) {
 
 
         <?php
+                            echo "<div id='structProduit'>";
             //if (!isset($_SESSION['idProduct'])){ $_SESSION['idProduct'] = 1; }
             $requete = $connexion->prepare("SELECT * FROM products WHERE id = :idProduct");
             $requete->bindParam(':idProduct', $idProduct);
             $requete->execute();
             $row = $requete->fetch(PDO::FETCH_ASSOC);
-            if ($requete){
+            if ($requete->execute()){
                 if ($requete->rowCount() > 0){
                         if ($row['nom'] && $row['prix'] && $row['vendeur'] && $row['description']){
                             
-                            if (isset($row['imageData'])) $dataImage= readfile("../FichierClient/products-imageData.bin");
-                            //echo $dataImage;
+                            if (!empty($row['imageData'])){
 
+                                $base64Encoded = base64_encode($row['imageData']);
 
-                            echo $row["nom"] . ", " . $row["prix"] . "€";
-                            echo "<br>" . "vendu par : " . $row["vendeur"] . "<br>" . $row["description"] . "<br>";
-                            echo "quantité restante : " . $row["nbStock"] . "<br>" ;
+                                    ?>
+                <img src="data:image/jpeg;base64,<?php echo $base64Encoded; ?>" alt="Image encodée en base64">
+                                    <?php
+                                    
+                                
+
+                                //header('Content-Type: image/jpg');
+                                //echo $row['imageData'];
+                                
+                            }
+
+                            echo "<div id='description'>";
+                            echo "<br><br>";
+                            echo "<span id='nom'>" . $row["nom"] . "</span>" .  "<span id='prix'>" . $row["prix"] . "€ </span>";
+                            echo "<br><br>" . "Vendu par : " . "<span id='vendeur'>" .$row["vendeur"] . " </span> <br>" . $row["description"] . "<br> ";
+                            echo "quantité restante : " . "<span id='nbStock'>" . $row["nbStock"] . "</span> <br>" ;
+                            echo "</div>";
+                            echo "</div>";
                        }
                        
                 }
@@ -111,7 +127,9 @@ if (isset($_GET['id'])) {
         ?>
     
 
-    <br><br><br><br><br><br><br>
+    <br><br>
+    <label for="ajoutPanier">Ajouter au panier</label>
+    <input type="button" name= "ajoutPanier" value="Ajouter">
     <p>On est pas bien là?</p>
     <br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br>

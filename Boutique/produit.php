@@ -31,9 +31,16 @@ if (!isset($_SESSION['ppAdress'])){
 
 
 if (isset($_GET['id'])) {
-    $idProduct = $_GET['id'];
+    $_SESSION['idProduct'] = $_GET['id'];
 } else {
     // Gérer le cas où l'ID n'est pas présent dans l'URL.
+}
+
+if (!isset($_SESSION['panier'])){
+    $tableau = array(
+        array("id", "quantité")
+    );
+    $_SESSION['panier'] = $tableau;
 }
 
 
@@ -87,7 +94,7 @@ if (isset($_GET['id'])) {
                             echo "<div id='structProduit'>";
             //if (!isset($_SESSION['idProduct'])){ $_SESSION['idProduct'] = 1; }
             $requete = $connexion->prepare("SELECT * FROM products WHERE id = :idProduct");
-            $requete->bindParam(':idProduct', $idProduct);
+            $requete->bindParam(':idProduct', $_SESSION['idProduct']);
             $requete->execute();
             $row = $requete->fetch(PDO::FETCH_ASSOC);
             if ($requete->execute()){
@@ -116,6 +123,9 @@ if (isset($_GET['id'])) {
                             echo "quantité restante : " . "<span id='nbStock'>" . $row["nbStock"] . "</span> <br>" ;
                             echo "</div>";
                             echo "</div>";
+
+
+                            $_SESSION['nbStock'] = $row["nbStock"];
                        }
                        
                 }
@@ -128,10 +138,19 @@ if (isset($_GET['id'])) {
     
 
     <br><br>
-    <label for="ajoutPanier">Ajouter au panier</label>
-    <a href="" onclick="">
+    <label for="ajoutPanie">Ajouter au panier</label>
+    <a href="../php/ajoutPanier.php" onclick="">
         <img src="/CyberProjet/Image/panier.png" alt="panier">
     </a>
+    <?php 
+    echo count($_SESSION['panier']);
+    ?>
+
+    
+     
+
+
+
     <p>On est pas bien là?</p>
     <br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br>
